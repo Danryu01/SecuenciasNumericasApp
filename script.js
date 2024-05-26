@@ -37,7 +37,7 @@ const hideSomeSequences = () => {
 const showQuiz = () => {
 	for(let i=0;i<sequencesHide.length;i++){
 		if(sequencesHide[i]==="_"){
-			alternatives.innerHTML += `<div class="alternative"><input class="answer" valueNumber="${i}" type="number"></input></div>`;
+			alternatives.innerHTML += `<div class="alternative"><input class="answer" valueNumber="${i}" type="number"></input><i class="out"></i></div>`;
 		}
 		else{
 			alternatives.innerHTML += `<div class="alternative">${sequencesHide[i]}</div>`;
@@ -49,6 +49,8 @@ document.querySelector('#register').addEventListener('click', () => {
 	const getAnswersValue = document.querySelectorAll('.answer');
 	let result = "";
 	getAnswersValue.forEach((answer) => {
+		let parent = answer.parentElement;
+		let icon = parent.querySelector(".out");
 		let position = answer.getAttribute("valueNumber");
 		let value = answer.value;
 		if(sequences[position]==value){
@@ -57,7 +59,7 @@ document.querySelector('#register').addEventListener('click', () => {
 		else{
 			result = "✘";
 		}
-		answer.value = result;
+		icon.innerHTML = result;
 	})
 
 })
